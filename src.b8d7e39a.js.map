@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.js"],"names":["DEBOUNCE_DELAY"],"mappings":";;;AAIA,aAJA,QAAA,oBAEA,MAAMA,EAAiB","file":"src.b8d7e39a.js","sourceRoot":"../src","sourcesContent":["import './css/styles.css';\n\nconst DEBOUNCE_DELAY = 300;\n\n// fetch('https://restcountries.com/v3.1').then(data => data.parse()).then(console.log();)\n"]}
