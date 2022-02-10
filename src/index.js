@@ -1,5 +1,6 @@
 import './css/styles.css';
 import countryTemplate from './templates/country-template.hbs';
+import countriesListTemplate from './templates/countries-list-template.hbs'
 
 import Notiflix from 'notiflix';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -30,25 +31,38 @@ searchInputRef.addEventListener('input', debounce(onSearchInput, DEBOUNCE_DELAY)
 
   function onSearchInput(e) {
    
-      const countryName = e.target.value.trim();
-      console.log(countryName);
-      if(countryName === "") {
+      const countryInputName = e.target.value.trim();
+      console.log(countryInputName);
+      if(countryInputName === "") {
         bodyRef.innerHTML ='';
         return;
       }
       console.log(0);
-      fetch(`${BASE_URL}/name/${countryName}?fields=name,capital,population,flags,languages`).then(response => {
-        //   if(!response.ok) {
-        //       throw new Error(Notiflix.Notify.failure('Qui timide rogat docet negare'))
-        //   }
+      fetch(`${BASE_URL}/name/${countryInputName}?fields=name,capital,population,flags,languages`).then(response => {
+          if(!response.ok) {
+              throw new Error(Notiflix.Notify.failure('Qui timide rogat docet negare'))
+          }
           return response.json();
       }).then(data => {
+          
+          if(data.length >= 2 && data.length <= 10) {
+            // countriesListTemplate(data.map(country))
+            data.map(({ name, flags } )=> {
+                const countryName = name.official;
+                const countryFlag = flags.svg;
+                const markup = countriesListTemplate({countryName, countryFlag});
+                bodyRef.insertAdjacentHTML('beforeend', markup)
+
+            } )
+            return;
+          }
           if(data.length > 10) {
             Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
             return;
           }
           getCountryInfo(data)
-        }).catch(() => Notiflix.Notify.failure('"Oops, there is no country with that name"'))
+        })
+        // }).catch(() => Notiflix.Notify.failure('"Oops, there is no country with that name"'))
     //   https://restcountries.com/v3.1/name/{name}
 //     https://restcountries.com/v2/{service}?fields={field},{field},{field}
 // https://restcountries.com/v2/all?fields=name,capital,currencies
