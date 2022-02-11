@@ -1,18 +1,20 @@
-<article class="country-article">
-    <img src="{{countryFlag}}" alt="{{countryName}}" class="country-img">
-    <h2 class="country-title">{{countryName}}</h2>
+
+    <div class="country">
+    <img src="{{svg}}" alt="{{official}}" class="country-flag">
+    <h2 class="country-name">{{official}}</h2>
+    </div>
+    
     <ul class="country-description-list">
         <li class="description-item">
-            <h3 class="description-title">Population</h3>
-            <p class="description-text">{{countryPopulation}}</p>
+            <p class="description-title">Population:</p>
+            <span class="description-text">{{population}}</span>
         </li>
         <li class="description-item">
-            <h3 class="description-title">Capital</h3>
-            <p class="description-text">{{countryCapital}}</p>
+            <p class="description-title">Capital:</p>
+            <span class="description-text">{{capital}}</span>
         </li>
         <li class="description-item">
-            <h3 class="description-title">Languages</h3>
-            <p class="description-text">{{countryLanguages}}</p>
+            <p class="description-title">Languages:</p>
+            <span class="description-text">{{countryLanguages}}</span>
         </li>
     </ul>
-</article>

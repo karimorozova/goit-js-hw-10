@@ -42,8 +42,8 @@ padding: 0;
 }
 .country-flag {
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   margin-right: 20px;
 }
 
@@ -52,44 +52,34 @@ padding: 0;
   font-size: 20px;
 }
 
-.country-img {
-display: block;
-width: 300px;
-height: 200px;
-margin-bottom: 30px;
-}
-
-.country-title {
-  font-weight: 700;
-  font-size: 40px;
-  margin-bottom: 20px;
-
-}
 
 .country-description-list {
   list-style: none;
+  
 
 }
 
 .description-item {
   display: flex;
+  align-items: center;
+ 
 
 }
 
 .description-item:not(:last-child) {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .description-title {
-  margin-right: 20px;
-  font-weight: 500;
-  font-size: 30px;
+  margin-right: 10px;
+  font-weight: 700;
+  font-size: 16px;
 
 }
 
 .description-text {
-  font-weight: 400;
-  font-size: 30px;
+  
+  font-size: 16px;
 
 }
 
