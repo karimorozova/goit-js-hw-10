@@ -20,13 +20,19 @@ import { Block } from 'notiflix/build/notiflix-block-aio';
 
 const debounce = require('lodash.debounce');
 
-const searchInputRef = document.querySelector('#search-box');
-const bodyRef = document.querySelector('body');
-console.log(searchInputRef);
+const refs = {
+    searchInput: document.querySelector('#search-box'),
+    countryList: document.querySelector('.country-list'),
+    countryInfo: document.querySelector('.country-info')
+}
+
+// const searchInputRef = document.querySelector('#search-box');
+// const bodyRef = document.querySelector('body');
+// console.log(searchInputRef);
 const DEBOUNCE_DELAY = 300;
 const BASE_URL = "https://restcountries.com/v3.1";
 
-searchInputRef.addEventListener('input', debounce(onSearchInput, DEBOUNCE_DELAY))
+refs.searchInput.addEventListener('input', debounce(onSearchInput, DEBOUNCE_DELAY))
 
 
   function onSearchInput(e) {
@@ -34,7 +40,8 @@ searchInputRef.addEventListener('input', debounce(onSearchInput, DEBOUNCE_DELAY)
       const countryInputName = e.target.value.trim();
       console.log(countryInputName);
       if(countryInputName === "") {
-        bodyRef.innerHTML ='';
+        refs.countryList.innerHTML ='';
+        // refs.countryInfo.innerHTML = '';
         return;
       }
       console.log(0);
@@ -47,11 +54,18 @@ searchInputRef.addEventListener('input', debounce(onSearchInput, DEBOUNCE_DELAY)
           
           if(data.length >= 2 && data.length <= 10) {
             // countriesListTemplate(data.map(country))
-            data.map(({ name, flags } )=> {
-                const countryName = name.official;
-                const countryFlag = flags.svg;
-                const markup = countriesListTemplate({countryName, countryFlag});
-                bodyRef.insertAdjacentHTML('beforeend', markup)
+            data.map(({ name: { official }, flags: { svg } } )=> {
+                console.log(official);
+                console.log(svg);
+                const options = {
+                    official,
+                    svg,
+                }
+                console.log(options);
+                // const countryName = name.official;
+                // const countryFlag = flags.svg;
+                const markup = countriesListTemplate(options);
+                refs.countryList.insertAdjacentHTML('beforeend', markup);
 
             } )
             return;
@@ -83,7 +97,7 @@ function getCountryInfo(data) {
     const markup = countryTemplate(countryOptions);
     
     
-    bodyRef.insertAdjacentHTML('beforeend', markup);
+    refs.countryList.innerHTML =  markup;
 
 
 }
