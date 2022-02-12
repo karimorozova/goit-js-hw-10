@@ -42,9 +42,6 @@ refs.searchInput.addEventListener('input', debounce(onSearchInput, DEBOUNCE_DELA
 
           countries.map(getCountryInfo);
 
-        }).catch(() => {
-            clearInterface();
-            Notiflix.Notify.failure('"Oops, there is no country with that name"')
         })
   }
 function getCountryInfo({ name: { official }, capital, population, flags: { svg }, languages }) {
@@ -58,7 +55,7 @@ function getCountryList({ name: { official }, flags: { svg } }) {
     refs.countryList.insertAdjacentHTML('beforeend', countriesListTemplate({official, svg}));
 
 }
-function clearInterface() {
+export default function clearInterface() {
     refs.countryList.innerHTML ='';
         refs.countryInfo.innerHTML = "";
 }
